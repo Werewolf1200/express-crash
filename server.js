@@ -4,6 +4,8 @@ import path from 'path';
 import posts from './routes/posts.js';
 
 import logger from './middleware/logger.js';
+import errorHandler from './middleware/error.js';
+import notFound from './middleware/notFound.js';
 
 // Especificar archivo env --env-file=.env
 const port = process.env.PORT || 8000;
@@ -23,5 +25,11 @@ app.use(logger);
 
 // Routes (Middleware)
 app.use('/api/posts', posts)
+
+// Page Not Found 
+app.use(notFound);
+
+// Error Handler
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
